@@ -7,7 +7,7 @@ using namespace std;
 
 bool is_prime(int n)
 {
-  for (int i = 2; i <= sqrt(n); i++)
+  for (int i = 2; i*i < n; i++)
     if (n % i == 0)
       return false;
 
@@ -19,7 +19,7 @@ int compute_product()
   const long long in = 600851475143;
 
   for (long long l = 2; l < in; l++)
-    if (in / l * l == in && is_prime(in / l))
+    if (in % l == 0 && is_prime(in / l))
       return in / l;
 
   return 1;
