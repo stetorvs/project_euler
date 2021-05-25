@@ -13,7 +13,7 @@ class C {
     int n;
     int sum;
 
-    C(int n) : n(n)
+    explicit C(int n) : n(n)
     {
       v.resize(n+1);
       iota(begin(v)+1, end(v), 0);
@@ -37,11 +37,10 @@ void C::recurse()
   if (sum <= n && s.size() <= v[sum]) {
     v[sum] = s.size();
     s.push_back(sum);
-    auto endit = s.rend();
-    for (auto it = s.rbegin(); it != endit; ++it) {
-      sum += *it;
+    for (int i = static_cast<int>(s.size()) - 1; i >= 0; --i) {
+      sum += s[i];
       recurse();
-      sum -= *it;
+      sum -= s[i];
     }
     s.pop_back();
   }
